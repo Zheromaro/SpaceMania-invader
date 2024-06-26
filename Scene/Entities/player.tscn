@@ -1,0 +1,161 @@
+[gd_scene load_steps=12 format=3 uid="uid://b8t66m7epysey"]
+
+[ext_resource type="Script" path="res://Script/Player.gd" id="1_wlvdu"]
+[ext_resource type="Texture2D" uid="uid://b0ma1ndisxha5" path="res://Asset/icon.svg" id="2_wchyu"]
+[ext_resource type="PackedScene" uid="uid://cd2hg65g2rsdd" path="res://Scene/Components/ShootingComponent.tscn" id="3_32ndr"]
+[ext_resource type="PackedScene" uid="uid://crlh6bn6tu5nk" path="res://Scene/Components/HealthComponent.tscn" id="4_okvks"]
+[ext_resource type="PackedScene" uid="uid://ccqf80kl507jr" path="res://Scene/Components/HurtboxComponent.tscn" id="5_c5l3g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84sih"]
+size = Vector2(155, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nxcdd"]
+radius = 52.7376
+
+[sub_resource type="Animation" id="Animation_swi63"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bqtva"]
+resource_name = "died"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.964706, 0.32549, 0.427451, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 200)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4w87k"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.964706, 0.32549, 0.427451, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtdru"]
+_data = {
+"RESET": SubResource("Animation_swi63"),
+"died": SubResource("Animation_bqtva"),
+"hit": SubResource("Animation_4w87k")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_rate", "shooting_component", "animation_player")]
+scale = Vector2(0.4, 0.4)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_wlvdu")
+speed = 400.0
+fire_rate = NodePath("FireRate")
+shooting_component = NodePath("ShootingComponent")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_84sih")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wchyu")
+
+[node name="ShootingComponent" parent="." instance=ExtResource("3_32ndr")]
+position = Vector2(0, -97.5)
+rotation = 0.0
+scale = Vector2(0.980223, 0.966836)
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_okvks")]
+max_health = 3
+
+[node name="HurtboxComponet" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_c5l3g")]
+visible = false
+health_component = NodePath("../HealthComponent")
+tack_damage_groups = Array[String](["EnemyAttack"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponet"]
+shape = SubResource("CircleShape2D_nxcdd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dtdru")
+}
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

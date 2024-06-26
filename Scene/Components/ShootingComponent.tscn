@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd2hg65g2rsdd"]
+
+[ext_resource type="Script" path="res://Script/Component/ShootingComponent.gd" id="1_0whoo"]
+[ext_resource type="PackedScene" uid="uid://cidymb0y8dsdq" path="res://Scene/Objects/bullet.tscn" id="2_jcplh"]
+
+[node name="ShootingComponent" type="Node2D"]
+rotation = 3.14159
+script = ExtResource("1_0whoo")
+bullet = ExtResource("2_jcplh")

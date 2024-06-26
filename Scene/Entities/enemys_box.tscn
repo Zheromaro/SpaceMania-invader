@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck4i74t2vie1t"]
+
+[ext_resource type="Script" path="res://Script/EnemysMovement.gd" id="1_sn8rf"]
+
+[sub_resource type="Animation" id="Animation_jp2ir"]
+resource_name = "step_left"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b6oib"]
+_data = {
+"step_left": SubResource("Animation_jp2ir")
+}
+
+[node name="EnemysBox" type="Node2D" node_paths=PackedStringArray("step_timer", "ray_cast_left", "ray_cast_right")]
+script = ExtResource("1_sn8rf")
+speed = 100.0
+vertical_step_length = 10
+horizontal_step_length = 50
+step_timer = NodePath("StepTimer")
+ray_cast_left = NodePath("RayCastLeft")
+ray_cast_right = NodePath("RayCastRight")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(-224, 0)
+scale = Vector2(0.5, 0.5)
+target_position = Vector2(-90, 0)
+collision_mask = 4
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(224, 0)
+scale = Vector2(0.5, 0.5)
+target_position = Vector2(90, 0)
+collision_mask = 4
+
+[node name="StepTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_b6oib")
+}

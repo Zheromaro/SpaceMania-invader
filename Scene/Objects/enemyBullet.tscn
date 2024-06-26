@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b83nmebw11l7s"]
+
+[ext_resource type="Script" path="res://script/bullet.gd" id="1_tbv0x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6fcd"]
+size = Vector2(2, 18)
+
+[node name="enemyBullet" type="Area2D" groups=["EnemyAttack"]]
+script = ExtResource("1_tbv0x")
+bullet_speed = 650.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a6fcd")
+debug_color = Color(0, 0.529412, 0.988235, 0.419608)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited" flags=18]

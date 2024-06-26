@@ -1,0 +1,261 @@
+[gd_scene load_steps=14 format=3 uid="uid://brctgso3k01qn"]
+
+[ext_resource type="PackedScene" uid="uid://b8t66m7epysey" path="res://Scene/Entities/player.tscn" id="1_35cuo"]
+[ext_resource type="PackedScene" uid="uid://dlsgffhbmxgwp" path="res://Scene/Objects/WorldBound.tscn" id="2_xabv0"]
+[ext_resource type="PackedScene" uid="uid://ck4i74t2vie1t" path="res://Scene/Entities/enemys_box.tscn" id="4_l87tl"]
+[ext_resource type="PackedScene" uid="uid://cso4mjn4c7jew" path="res://Scene/Objects/Wall.tscn" id="4_w0gjm"]
+[ext_resource type="PackedScene" uid="uid://c3gqswryrrhv3" path="res://Scene/Entities/enemy.tscn" id="5_0mvl4"]
+[ext_resource type="Script" path="res://Scene/UIManager.gd" id="6_6uat5"]
+[ext_resource type="Texture2D" uid="uid://b01jw4e54407t" path="res://Asset/ParticalSprite.png" id="6_sq05f"]
+[ext_resource type="Theme" uid="uid://bo3efy8ssiyr6" path="res://Asset/new_theme.tres" id="7_tw222"]
+
+[sub_resource type="Gradient" id="Gradient_ol5g5"]
+offsets = PackedFloat32Array(0, 0.225108, 0.818182, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6va3r"]
+gradient = SubResource("Gradient_ol5g5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n52y0"]
+emission_shape = 3
+emission_box_extents = Vector3(555, 300, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = -2.0
+initial_velocity_max = 2.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_6va3r")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubtt5"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_1u107"]
+font_size = 32
+outline_size = 10
+outline_color = Color(0.582031, 0.578125, 0.738281, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[node name="Game" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_35cuo")]
+position = Vector2(557, 601)
+
+[node name="WorldBound" parent="." instance=ExtResource("2_xabv0")]
+
+[node name="wall" type="Node" parent="."]
+
+[node name="Wall" parent="wall" instance=ExtResource("4_w0gjm")]
+position = Vector2(216, 512)
+scale = Vector2(2.12, 0.2)
+
+[node name="Wall2" parent="wall" instance=ExtResource("4_w0gjm")]
+position = Vector2(576, 512)
+
+[node name="Wall3" parent="wall" instance=ExtResource("4_w0gjm")]
+position = Vector2(936, 512)
+scale = Vector2(2.12, 0.2)
+
+[node name="EnemysBox" parent="." instance=ExtResource("4_l87tl")]
+position = Vector2(560, 137)
+
+[node name="Enemy" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-176, -97)
+
+[node name="Enemy1" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-88, -97)
+
+[node name="Enemy2" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(0, -97)
+
+[node name="Enemy3" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(88, -96)
+
+[node name="Enemy4" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(176, -96)
+
+[node name="Enemy5" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-224, -35)
+
+[node name="Enemy6" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-136, -35)
+
+[node name="Enemy7" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-48, -35)
+
+[node name="Enemy8" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(40, -34)
+
+[node name="Enemy9" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(128, -34)
+
+[node name="Enemy10" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(216, -34)
+
+[node name="Enemy11" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-176, 29)
+
+[node name="Enemy12" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-88, 29)
+
+[node name="Enemy13" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(0, 29)
+
+[node name="Enemy14" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(88, 30)
+
+[node name="Enemy15" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(176, 30)
+
+[node name="Enemy16" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-224, 91)
+
+[node name="Enemy17" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-136, 91)
+
+[node name="Enemy18" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(-48, 91)
+
+[node name="Enemy19" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(40, 92)
+
+[node name="Enemy20" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(128, 92)
+
+[node name="Enemy21" parent="EnemysBox" instance=ExtResource("5_0mvl4")]
+position = Vector2(216, 92)
+
+[node name="BackGround" type="ColorRect" parent="."]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.139051, 0.15935, 0.197059, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BackGround"]
+position = Vector2(576, 352)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_n52y0")
+texture = ExtResource("6_sq05f")
+lifetime = 15.0
+preprocess = 10.0
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_menu", "play_menu")]
+process_mode = 3
+script = ExtResource("6_6uat5")
+pause_menu = NodePath("Pause Menu")
+play_menu = NodePath("Play Menu")
+
+[node name="Pause Menu" type="Panel" parent="UI"]
+process_mode = 2
+visible = false
+self_modulate = Color(1, 1, 1, 0.658824)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Pause Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -125.0
+offset_right = 178.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Pause Menu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Pause Menu/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Pause Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pause"
+label_settings = SubResource("LabelSettings_ubtt5")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="UI/Pause Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContinueButton" type="Button" parent="UI/Pause Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_tw222")
+text = "Continue"
+
+[node name="RestartButton" type="Button" parent="UI/Pause Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_tw222")
+text = "Restart"
+
+[node name="Play Menu" type="Panel" parent="UI"]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/Play Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Play Menu"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -157.0
+offset_right = 160.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Play Menu/PanelContainer"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="UI/Play Menu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Space Mania 
+invader"
+label_settings = SubResource("LabelSettings_1u107")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Control" type="Control" parent="UI/Play Menu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayButton" type="Button" parent="UI/Play Menu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_tw222")
+text = "Play"
+
+[connection signal="pressed" from="UI/Pause Menu/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="UI" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="UI/Pause Menu/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/Play Menu/PanelContainer/VBoxContainer/PlayButton" to="UI" method="_on_play_button_pressed"]
